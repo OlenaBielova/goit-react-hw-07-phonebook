@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, ErrorMessage } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/operations'; 
+import { addContact } from 'redux/operations';
 import {
   NewContactForm,
   NameInput,
@@ -9,7 +9,6 @@ import {
   AddBtn,
   Error,
 } from './Form.styled';
-
 
 export function ContactForm() {
   const dispatch = useDispatch();
@@ -36,10 +35,7 @@ export function ContactForm() {
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-    >
+    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       <NewContactForm autoComplete="off">
         <label>
           {' '}

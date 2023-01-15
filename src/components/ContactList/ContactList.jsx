@@ -1,18 +1,17 @@
 import React from 'react';
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getContacts, getFilter} from '../../redux/selectors';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts, getFilter } from '../../redux/selectors';
 import { List, Contact, DeleteBtn } from './ContactList.styled';
-import { fetchContacts, deleteContact } from 'redux/operations'; 
-
+import { fetchContacts, deleteContact } from 'redux/operations';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
 
-    useEffect(() => {
+  useEffect(() => {
     dispatch(fetchContacts());
-    }, [dispatch]);
-  
+  }, [dispatch]);
+
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
 
@@ -25,7 +24,7 @@ export const ContactList = () => {
   return (
     <List>
       {isLoading && <p>Loading contacts...</p>}
-          {error && <p>{error}</p>}
+      {error && <p>{error}</p>}
       {filteredContacts.map(({ name, phone, id }) => (
         <Contact key={id}>
           <p>
@@ -39,4 +38,3 @@ export const ContactList = () => {
     </List>
   );
 };
-
