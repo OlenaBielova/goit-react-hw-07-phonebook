@@ -1,7 +1,7 @@
 import React from 'react';
 import { SearchByName, SearchInput } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
-// import { changeFilter } from 'redux/contactsSlice';
+import { changeFilter } from 'redux/contactsSlice';
 
 export const Filter = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export const Filter = () => {
       <SearchInput
         type="text"
         value={filter}
-        // onChange={e => dispatch(changeFilter(e.target.value))}
+        onChange={e => dispatch(changeFilter(e.target.value))}
         name="filter"
       />
     </SearchByName>

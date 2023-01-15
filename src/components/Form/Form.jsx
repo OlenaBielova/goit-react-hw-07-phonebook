@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, ErrorMessage } from 'formik';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/operations'; 
 import {
   NewContactForm,
   NameInput,
@@ -8,8 +9,7 @@ import {
   AddBtn,
   Error,
 } from './Form.styled';
-import { useDispatch, useSelector } from 'react-redux';
-// import { addContact } from 'redux/contactsSlice';
+
 
 export function ContactForm() {
   const dispatch = useDispatch();
@@ -17,29 +17,28 @@ export function ContactForm() {
 
   const initialValues = {
     name: '',
-    number: '',
+    phone: '',
     id: '',
   };
 
-  const handleSubmit = (contact, { resetForm }) => {
-    const normalizedName = contact.name.toLowerCase();
-    const repeatedNameList = contacts.filter(
-      contact => contact.name.toLowerCase() === normalizedName
+  const handleSubmit = (item, { resetForm }) => {
+    const normalizedName = item.name.toLowerCase();
+    const repeatedNameList = contacts.items.filter(
+      item => item.name.toLowerCase() === normalizedName
     );
-    
+
     if (repeatedNameList.length === 0) {
-      dispatch();
-      // dispatch(addContact(contact));
+      dispatch(addContact(item));
       resetForm();
       return;
     }
-    alert(`${contact.name} is already in contacts`);
+    alert(`${item.name} is already in contacts`);
   };
 
   return (
     <Formik
       initialValues={initialValues}
-      // onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
     >
       <NewContactForm autoComplete="off">
         <label>
@@ -64,7 +63,7 @@ export function ContactForm() {
           <NumberInput
             type="tel"
             placeholder="+38011 111 11 11"
-            name="number"
+            name="phone"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required

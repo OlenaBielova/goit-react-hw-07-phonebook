@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const List = styled.ul`
   margin-right: auto;
   margin-left: auto;
-  width: 700px;
+  width: 650px;
   list-style-type: circle;
 `;
 
